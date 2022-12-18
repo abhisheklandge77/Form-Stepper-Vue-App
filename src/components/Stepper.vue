@@ -13,9 +13,6 @@ export default {
   data() {
     return {
       activeStep: 1,
-      progressValue: [0, 50, 100],
-      progress: "",
-
       steps: [
         {
           label: "Select date range",
@@ -35,21 +32,12 @@ export default {
   methods: {
     handleNextBtnClick() {
       this.activeStep = this.activeStep + 1;
-      this.progress = `width: ${
-        this.progressValue[this.activeStep - 1]
-      }%; transition: .3s all;`;
     },
     handleBackBtnClick() {
       this.activeStep = this.activeStep - 1;
-      this.progress = `width: ${
-        this.progressValue[this.activeStep - 1]
-      }%; transition: .3s all;`;
     },
     handleStepLabelClick(step) {
       this.activeStep = step.number;
-      this.progress = `width: ${
-        this.progressValue[this.activeStep - 1]
-      }%; transition: .3s all;`;
     },
   },
 };
@@ -57,17 +45,11 @@ export default {
 
 <template>
   <div class="stepper-container">
-    <div class="progress">
-      <div
-        class="progress-bar"
-        role="progressbar"
-        aria-valuenow="60"
-        aria-valuemin="0"
-        aria-valuemax="100"
-        :style="progress"
-      ></div>
-    </div>
-    <div class="step" v-for="(step, i) in steps" :key="i">
+    <div
+      :class="['step', `${step.number != steps.length ? 'expand' : ''}`]"
+      v-for="(step, i) in steps"
+      :key="i"
+    >
       <div
         :class="[
           'step-number',
@@ -79,10 +61,18 @@ export default {
         <span v-else>{{ step.number }}</span>
       </div>
       <div
+        v-if="step.number != steps.length"
+        :class="[
+          'step-connector',
+          `${activeStep > step.number ? 'completed-connector' : ''}`,
+        ]"
+      ></div>
+      <div
         :class="[
           'step-label',
           `${activeStep === step.number ? 'active-label' : ''}`,
           `${activeStep > step.number ? 'completed-step' : ''}`,
+          `${step.number === steps.length ? 'last-step-label' : ''}`,
         ]"
         @click="activeStep > step.number && handleStepLabelClick(step)"
       >
@@ -135,11 +125,10 @@ export default {
 <style scoped>
 .stepper-container {
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
   padding: 1em;
   width: 60%;
-  margin: 0 auto;
+  margin: 1rem auto 2rem auto;
   position: relative;
 }
 .progress {
@@ -173,7 +162,7 @@ export default {
 .step-number > i {
   background-color: #fff;
   color: #114a21;
-  padding: 0.75rem;
+  padding: 0.7rem;
   border-radius: 50%;
   border: 2px solid #114a21;
   margin-top: -8px;
@@ -181,19 +170,41 @@ export default {
 .step {
   text-align: center;
   z-index: 2;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.expand {
+  width: 100%;
+}
+.step-connector {
+  width: 100%;
+  height: 5px;
+  background-color: #c8c8c8;
+}
+.completed-connector {
+  background-color: #5c9a1b;
+  transition: 0.3s all;
 }
 .step-label {
   color: #53575a;
-  padding-top: 1rem;
+  padding-top: 1.2rem;
   font-weight: bold;
+  position: absolute;
+  top: 18px;
+  left: -35px;
 }
 .active-label {
   color: #114a21;
 }
 .completed-step {
-  padding-top: 0.2rem;
+  padding-top: 1.2rem;
   text-decoration: underline;
   cursor: pointer;
+}
+.last-step-label {
+  width: 200px;
+  left: -80px;
 }
 .stepper-btn-container {
   width: 60%;
@@ -212,11 +223,13 @@ export default {
   padding: 0.5rem 0.7rem;
   color: #5c9a1b;
   background-color: #fff;
-  border: 1px solid #5c9a1b;
+  border: 2px solid #5c9a1b;
   outline: none;
   border-radius: 3px;
   margin-right: 1rem;
+  margin-left: 1.5rem;
   cursor: pointer;
+  font-weight: bold;
 }
 .extra-info {
   width: 60%;

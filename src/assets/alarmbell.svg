@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="48px" height="48px" viewBox="0 0 48 48" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Decorative icons/security/alarmbell</title>
+    <g id="Decorative-icons/security" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="Decorative-icons/security/alarmbell" stroke="#BE5000" stroke-width="5">
+            <line x1="24" y1="5" x2="24" y2="9" id="Stroke-1"></line>
+            <path d="M12,22 C12,14.551 17.734,8.239 25.456,9.079 C31.986,9.79 36,15.479 36,21.963 L36,33 C36,34.047 37.221,34.679 37.972,35.419 L38.869,36.305 C39.593,37.02 40,37.989 40,39 L8,39 C8,37.989 8.407,37.02 9.131,36.305 L10.028,35.419 C10.779,34.679 12,34.047 12,33 L12,22 Z" id="Stroke-3"></path>
+            <path d="M19.5283,43.0007 C20.6273,44.2277 22.2233,44.9997 24.0003,44.9997 C25.7763,44.9997 27.3733,44.2277 28.4713,43.0007" id="Stroke-5"></path>
+        </g>
+    </g>
+</svg>
